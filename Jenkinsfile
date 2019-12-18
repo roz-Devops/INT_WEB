@@ -50,7 +50,7 @@ def NextVersion
          stage('Build') {
              steps {
                  script {
-                     dir('INT_API') {
+                     dir('INT_WEB') {
                       sh "ls"
                       sh "pwd"                   
                       try {
