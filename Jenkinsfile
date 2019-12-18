@@ -24,7 +24,7 @@ def NextVersion
                         //     deleteDir()
                         //     checkout([$class: 'GitSCM', branches: [[name: 'Prod']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'git-cred-id', url: "https://github.com/intclassproject/Release.git"]]])
                      //        path_json_file = sh(script: "pwd", returnStdout: true).trim() + '/' + 'Prod' + '.json'
-                         //    Current_version = Return_Json_From_File("$path_json_file").release.services.intapi.version
+                         //    Current_version = Return_Json_From_File("$path_json_file").release.services.intweb.version
                          //}
                   //   }
                      
@@ -54,7 +54,7 @@ def NextVersion
                       sh "ls"
                       sh "pwd"                   
                       try {
-                          //docker.build("intapi:$BuildVersion")
+                          //docker.build("intweb:$BuildVersion")
                   //     sh "sudo chmod 777 Dockerfile"
                            sh "sudo docker build -t intweb:$BuildVersion ."
                            println("The build image is successfully")  
@@ -79,7 +79,7 @@ def NextVersion
                      try{
                          withCredentials([usernamePassword(credentialsId: 'rozana_dockerhub', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
                                 sh "docker login -u=${DOCKER_USERNAME} -p=${DOCKER_PASSWORD}"
-                                sh "docker tag intapi:$BuildVersion $registry:intapi_$BuildVersion"
+                                sh "docker tag intweb:$BuildVersion $registry:intweb_$BuildVersion"
                                 sh "docker push $registry:intweb_$BuildVersion"
                                 
                          }
@@ -97,7 +97,7 @@ def NextVersion
 //steps{
             //         script{
              //            node('master'){
-              //               build job: 'E2E-CI', parameters: [ string(name: 'triggered_by', value: 'intapi'), string(name:'next_version', value: NextVersion), string(name: 'Image_version', value: 'int_api_' + BuildVersion)]
+              //               build job: 'E2E-CI', parameters: [ string(name: 'triggered_by', value: 'intweb'), string(name:'next_version', value: NextVersion), string(name: 'Image_version', value: 'int_api_' + BuildVersion)]
                             
                  //        }
 
