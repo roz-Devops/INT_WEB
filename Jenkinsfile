@@ -28,7 +28,7 @@ def NextVersion
                          //}
                   //   }
                      
-                     dir('INT_API') {
+                     dir('INT_WEB') {
                          deleteDir()
                          checkout([$class: 'GitSCM', branches: [[name: 'Dev']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'git_rd_cred', url: 'https://github.com/roz-Devops/INT_WEB.git']]])
                   //       Commit_Id = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
